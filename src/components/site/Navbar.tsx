@@ -30,30 +30,31 @@ type NavLink = {
 };
 
 const links: NavLink[] = [
-  { label: "Home", to: "/#home" },
-  { label: "About", to: "/#about" },
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
   {
     label: "Services",
-    to: "/#services",
+    to: "/services",
     mega: [
-      { icon: ShieldCheck, title: "Aadhaar & PAN", desc: "Enrolment, updates & linking", to: "/#services" },
-      { icon: HeartPulse, title: "Ayushman Bharat", desc: "Health card & insurance", to: "/#services" },
-      { icon: GraduationCap, title: "Education", desc: "Scholarships & admissions", to: "/#services" },
-      { icon: Banknote, title: "Banking & DBT", desc: "Jan Dhan, pensions, subsidies", to: "/#services" },
-      { icon: Tractor, title: "Farmer Services", desc: "PM-KISAN, crop insurance", to: "/#services" },
-      { icon: Briefcase, title: "Employment", desc: "Skill India, MGNREGA, jobs", to: "/#services" },
+      { icon: ShieldCheck, title: "Aadhaar & PAN", desc: "Enrolment, updates & linking", to: "/services" },
+      { icon: HeartPulse, title: "Ayushman Bharat", desc: "Health card & insurance", to: "/services" },
+      { icon: GraduationCap, title: "Education", desc: "Scholarships & admissions", to: "/services" },
+      { icon: Banknote, title: "Banking & DBT", desc: "Jan Dhan, pensions, subsidies", to: "/services" },
+      { icon: Tractor, title: "Farmer Services", desc: "PM-KISAN, crop insurance", to: "/services" },
+      { icon: Briefcase, title: "Employment", desc: "Skill India, MGNREGA, jobs", to: "/careers" },
     ],
   },
   {
     label: "Schemes",
-    to: "/#schemes",
+    to: "/schemes",
     mega: [
-      { icon: Users, title: "Welfare Schemes", desc: "Central & state benefits", to: "/#schemes" },
-      { icon: FileText, title: "Certificates", desc: "Income, caste, domicile", to: "/#schemes" },
-      { icon: Sparkles, title: "New Launches", desc: "Latest govt. programs", to: "/#schemes" },
+      { icon: Users, title: "Welfare Schemes", desc: "Central & state benefits", to: "/schemes" },
+      { icon: FileText, title: "Certificates", desc: "Income, caste, domicile", to: "/services" },
+      { icon: Sparkles, title: "New Launches", desc: "Latest govt. programs", to: "/schemes" },
     ],
   },
-  { label: "Contact", to: "/#contact" },
+  { label: "Careers", to: "/careers" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export function Navbar() {
