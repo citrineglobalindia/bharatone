@@ -292,84 +292,141 @@ export function Navbar() {
       </motion.header>
 
 
-      {/* Mobile fullscreen menu */}
+      {/* Mobile slide-in drawer */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             className="fixed inset-0 z-[65] lg:hidden"
           >
+            {/* Backdrop */}
             <motion.div
-              initial={{ clipPath: "circle(0% at calc(100% - 2.5rem) 2.5rem)" }}
-              animate={{ clipPath: "circle(150% at calc(100% - 2.5rem) 2.5rem)" }}
-              exit={{ clipPath: "circle(0% at calc(100% - 2.5rem) 2.5rem)" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 bg-background"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setOpen(false)}
+              className="absolute inset-0 bg-foreground/60 backdrop-blur-sm"
+            />
+
+            {/* Drawer panel */}
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 320, damping: 34 }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={{ left: 0, right: 0.4 }}
+              onDragEnd={(_, info) => {
+                if (info.offset.x > 80 || info.velocity.x > 500) setOpen(false);
+              }}
+              className="absolute top-0 right-0 h-full w-[85%] max-w-sm bg-background shadow-elegant flex flex-col overflow-hidden"
             >
+              {/* Tricolor accent */}
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[var(--saffron)] via-white to-[var(--india-green)]" />
-              <div className="container mx-auto px-6 pt-24 pb-10 h-full overflow-y-auto flex flex-col">
+              {/* Ambient glow */}
+              <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[var(--saffron)]/20 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-[var(--india-green)]/20 blur-3xl" />
+
+              {/* Drawer header */}
+              <div className="relative flex items-center justify-between px-6 pt-6 pb-4 border-b border-border/60">
+                <div className="flex items-center gap-2.5">
+                  <img src={logo} alt="BharatOne" className="h-9 w-auto" />
+                  <div className="flex flex-col leading-tight">
+                    <span className="font-display font-bold text-sm">
+                      Bharat<span className="text-[var(--saffron)]">One</span>
+                    </span>
+                    <span className="text-[10px] text-muted-foreground tracking-wider uppercase">
+                      Menu
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                  className="h-10 w-10 rounded-full flex items-center justify-center hover:bg-muted transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Drawer body */}
+              <div className="relative flex-1 overflow-y-auto px-6 py-5">
                 <motion.nav
                   initial="hidden"
                   animate="show"
                   variants={{
                     hidden: {},
-                    show: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
+                    show: { transition: { staggerChildren: 0.05, delayChildren: 0.15 } },
                   }}
-                  className="flex flex-col gap-1"
+                  className="flex flex-col"
                 >
-                  {links.map((l, i) => (
-                    <motion.a
-                      key={l.label}
-                      href={l.to}
-                      onClick={() => setOpen(false)}
-                      variants={{
-                        hidden: { x: 40, opacity: 0 },
-                        show: { x: 0, opacity: 1 },
-                      }}
-                      className="group flex items-center justify-between py-4 border-b border-border/60"
-                    >
-                      <span className="flex items-center gap-3">
-                        <span className="text-xs font-mono text-muted-foreground w-6">
-                          0{i + 1}
+                  {links.map((l, i) => {
+                    const isActive = active === l.to;
+                    return (
+                      <motion.a
+                        key={l.label}
+                        href={l.to}
+                        onClick={() => setOpen(false)}
+                        variants={{
+                          hidden: { x: 30, opacity: 0 },
+                          show: { x: 0, opacity: 1 },
+                        }}
+                        className={`group flex items-center justify-between py-4 border-b border-border/50 transition-colors ${
+                          isActive ? "text-foreground" : "text-foreground/85"
+                        }`}
+                      >
+                        <span className="flex items-center gap-3">
+                          <span className="text-[11px] font-mono text-muted-foreground w-6">
+                            0{i + 1}
+                          </span>
+                          <span className="text-xl font-display font-semibold">
+                            {l.label}
+                          </span>
+                          {isActive && (
+                            <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)]" />
+                          )}
                         </span>
-                        <span className="text-2xl font-display font-semibold">{l.label}</span>
-                      </span>
-                      <ArrowRight className="h-5 w-5 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" />
-                    </motion.a>
-                  ))}
+                        <ArrowRight className="h-4 w-4 text-muted-foreground -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" />
+                      </motion.a>
+                    );
+                  })}
                 </motion.nav>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="mt-auto pt-8 space-y-4"
-                >
-                  <Button
-                    onClick={() => setOpen(false)}
-                    className="w-full h-12 bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)] text-white"
-                  >
-                    Register Your Center <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                  <div className="grid grid-cols-2 gap-3 text-sm">
-                    <a
-                      href="tel:+919611101334"
-                      className="flex items-center gap-2 p-3 rounded-lg border border-border"
-                    >
-                      <Phone className="h-4 w-4 text-[var(--saffron)]" /> Call us
-                    </a>
-                    <a
-                      href="mailto:info@mybharatone.com"
-                      className="flex items-center gap-2 p-3 rounded-lg border border-border"
-                    >
-                      <Mail className="h-4 w-4 text-[var(--india-green)]" /> Email
-                    </a>
-                  </div>
-                </motion.div>
               </div>
-            </motion.div>
+
+              {/* Drawer footer */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+                className="relative border-t border-border/60 px-6 py-5 space-y-3 bg-background/80 backdrop-blur"
+              >
+                <Button
+                  onClick={() => setOpen(false)}
+                  className="w-full h-11 bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)] text-white shadow-soft"
+                >
+                  Register Your Center <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                <div className="grid grid-cols-2 gap-2.5 text-sm">
+                  <a
+                    href="tel:+919611101334"
+                    className="flex items-center gap-2 p-2.5 rounded-lg border border-border hover:bg-muted/60 transition-colors"
+                  >
+                    <Phone className="h-4 w-4 text-[var(--saffron)]" /> Call
+                  </a>
+                  <a
+                    href="mailto:info@mybharatone.com"
+                    className="flex items-center gap-2 p-2.5 rounded-lg border border-border hover:bg-muted/60 transition-colors"
+                  >
+                    <Mail className="h-4 w-4 text-[var(--india-green)]" /> Email
+                  </a>
+                </div>
+              </motion.div>
+            </motion.aside>
           </motion.div>
         )}
       </AnimatePresence>
