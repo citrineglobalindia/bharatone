@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Globe, AtSign, Hash, Send, Link as LinkIcon } from "lucide-react";
+import logo from "@/assets/bharatone-logo.png";
 const Facebook = Globe;
 const Instagram = AtSign;
 const Twitter = Hash;
@@ -10,18 +11,8 @@ export function Footer() {
     <footer className="bg-foreground text-background mt-24">
       <div className="container mx-auto px-4 sm:px-6 py-16 grid gap-10 md:grid-cols-4">
         <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <div className="relative h-10 w-10 rounded-xl overflow-hidden">
-              <div className="absolute inset-0 flex flex-col">
-                <div className="flex-1 bg-saffron" />
-                <div className="flex-1 bg-white" />
-                <div className="flex-1 bg-india-green" />
-              </div>
-            </div>
-            <div>
-              <div className="font-display font-bold text-lg">BharatOne</div>
-              <div className="text-[10px] uppercase tracking-widest opacity-60">For Indian Citizens</div>
-            </div>
+          <div className="bg-background rounded-xl p-2.5 inline-block shadow-soft">
+            <img src={logo} alt="BharatOne" className="h-9 w-auto" />
           </div>
           <p className="text-sm opacity-70 leading-relaxed">
             Revolutionizing how Indian citizens access essential services — from government paperwork to banking.
