@@ -179,8 +179,8 @@ export function Navbar() {
                     setOpenMega(l.mega ? l.label : null);
                   }}
                 >
-                  <a
-                    href={l.to}
+                  <Link
+                    to={l.to}
                     className="relative px-4 py-2 text-sm font-medium rounded-lg flex items-center gap-1 transition-colors text-foreground/75 hover:text-foreground"
                   >
                     {isHover && (
@@ -199,7 +199,7 @@ export function Navbar() {
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
-                  </a>
+                  </Link>
                 </div>
               );
             })}
