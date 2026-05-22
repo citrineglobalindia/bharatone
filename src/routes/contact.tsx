@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { getSupabase } from "@/lib/supabase";
 import {
   Phone,
   Mail,
@@ -132,9 +133,32 @@ function ContactPage() {
     if (Object.keys(next).length) return;
 
     setState("submitting");
-    // Replace with a real endpoint when ready.
-    await new Promise((r) => setTimeout(r, 1100));
-    setState("success");
+    try {
+      const supabase = getSupabase();
+      const { error } = await supabase
+        .from("bharatone_contact_submissions")
+        .insert({
+          name: fd.get("name")?.toString().trim(),
+          email,
+          phone: fd.get("phone")?.toString().trim() || null,
+          topic: (fd.get("topic")?.toString() || "services") as
+            | "services" | "center" | "partnership" | "media" | "other",
+          message: fd.get("msg")?.toString().trim(),
+          source: typeof window !== "undefined" ? window.location.href : null,
+          user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
+        });
+      if (error) {
+        console.error("Submission error:", error);
+        setErrors({ form: error.message || "Couldn't send your message. Please try again." });
+        setState("error");
+        return;
+      }
+      setState("success");
+    } catch (err: unknown) {
+      console.error(err);
+      setErrors({ form: "Network error. Please check your connection and try again." });
+      setState("error");
+    }
   };
 
   return (
@@ -321,6 +345,16 @@ function ContactPage() {
                 <Field id="msg" label="Message" error={errors.msg}>
                   <Textarea id="msg" name="msg" rows={5} placeholder="How can we help?" aria-invalid={!!errors.msg} />
                 </Field>
+
+                {errors.form && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="rounded-lg border border-destructive/30 bg-destructive/8 text-destructive text-sm px-3 py-2"
+                  >
+                    {errors.form}
+                  </motion.div>
+                )}
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 pt-2">
                   <Button
