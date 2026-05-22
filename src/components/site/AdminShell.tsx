@@ -8,6 +8,7 @@ import {
   Inbox,
   Users,
   MessageCircle,
+  Briefcase,
   Menu,
   X,
   Loader2,
@@ -19,6 +20,7 @@ const navItems = [
   { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/admin/responses", label: "Enquiries", icon: Inbox },
   { to: "/admin/visitors", label: "Visitors", icon: Users },
+  { to: "/admin/applications", label: "Applications", icon: Briefcase },
   { to: "/admin/chatbot", label: "Chatbot", icon: MessageCircle },
 ];
 

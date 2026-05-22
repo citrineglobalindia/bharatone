@@ -9,8 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SchemesRouteImport } from './routes/schemes'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AboutRouteImport } from './routes/about'
@@ -21,7 +23,13 @@ import { Route as AdminResponsesRouteImport } from './routes/admin/responses'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminChatbotRouteImport } from './routes/admin/chatbot'
+import { Route as AdminApplicationsRouteImport } from './routes/admin/applications'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -30,6 +38,11 @@ const ServicesRoute = ServicesRouteImport.update({
 const SchemesRoute = SchemesRouteImport.update({
   id: '/schemes',
   path: '/schemes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -82,14 +95,22 @@ const AdminChatbotRoute = AdminChatbotRouteImport.update({
   path: '/admin/chatbot',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminApplicationsRoute = AdminApplicationsRouteImport.update({
+  id: '/admin/applications',
+  path: '/admin/applications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
   '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
+  '/admin/applications': typeof AdminApplicationsRoute
   '/admin/chatbot': typeof AdminChatbotRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
@@ -102,8 +123,11 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
   '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
+  '/admin/applications': typeof AdminApplicationsRoute
   '/admin/chatbot': typeof AdminChatbotRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
@@ -117,8 +141,11 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
   '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
+  '/admin/applications': typeof AdminApplicationsRoute
   '/admin/chatbot': typeof AdminChatbotRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
@@ -133,8 +160,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/careers'
     | '/contact'
+    | '/privacy'
     | '/schemes'
     | '/services'
+    | '/terms'
+    | '/admin/applications'
     | '/admin/chatbot'
     | '/admin/dashboard'
     | '/admin/login'
@@ -147,8 +177,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/careers'
     | '/contact'
+    | '/privacy'
     | '/schemes'
     | '/services'
+    | '/terms'
+    | '/admin/applications'
     | '/admin/chatbot'
     | '/admin/dashboard'
     | '/admin/login'
@@ -161,8 +194,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/careers'
     | '/contact'
+    | '/privacy'
     | '/schemes'
     | '/services'
+    | '/terms'
+    | '/admin/applications'
     | '/admin/chatbot'
     | '/admin/dashboard'
     | '/admin/login'
@@ -176,8 +212,11 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
+  PrivacyRoute: typeof PrivacyRoute
   SchemesRoute: typeof SchemesRoute
   ServicesRoute: typeof ServicesRoute
+  TermsRoute: typeof TermsRoute
+  AdminApplicationsRoute: typeof AdminApplicationsRoute
   AdminChatbotRoute: typeof AdminChatbotRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
@@ -188,6 +227,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -200,6 +246,13 @@ declare module '@tanstack/react-router' {
       path: '/schemes'
       fullPath: '/schemes'
       preLoaderRoute: typeof SchemesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -272,6 +325,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminChatbotRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/applications': {
+      id: '/admin/applications'
+      path: '/admin/applications'
+      fullPath: '/admin/applications'
+      preLoaderRoute: typeof AdminApplicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -280,8 +340,11 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
+  PrivacyRoute: PrivacyRoute,
   SchemesRoute: SchemesRoute,
   ServicesRoute: ServicesRoute,
+  TermsRoute: TermsRoute,
+  AdminApplicationsRoute: AdminApplicationsRoute,
   AdminChatbotRoute: AdminChatbotRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,

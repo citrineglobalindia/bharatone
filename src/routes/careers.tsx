@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { PageShell } from "@/components/site/PageShell";
+import { ApplyDialog, type JobMeta } from "@/components/site/ApplyDialog";
 import { Button } from "@/components/ui/button";
 import {
   Briefcase,
@@ -158,6 +159,7 @@ const stagger: Variants = {
 
 function CareersPage() {
   const [openId, setOpenId] = useState<string | null>(null);
+  const [applyFor, setApplyFor] = useState<JobMeta | null>(null);
   const [team, setTeam] = useState<(typeof TEAMS)[number]>("All");
   const [q, setQ] = useState("");
 
@@ -389,17 +391,11 @@ function CareersPage() {
                               </div>
                               <div className="space-y-3">
                                 <Button
-                                  asChild
                                   size="lg"
+                                  onClick={() => setApplyFor({ id: job.id, title: job.title, team: job.team })}
                                   className="w-full bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)] text-white"
                                 >
-                                  <a
-                                    href={`mailto:careers@mybharatone.com?subject=Application:%20${encodeURIComponent(
-                                      job.title,
-                                    )}`}
-                                  >
-                                    Apply now <ArrowRight className="ml-1 h-4 w-4" />
-                                  </a>
+                                  Apply now <ArrowRight className="ml-1 h-4 w-4" />
                                 </Button>
                                 <Button asChild variant="outline" className="w-full">
                                   <Link to="/contact">Ask a question</Link>
@@ -452,6 +448,12 @@ function CareersPage() {
           </Button>
         </motion.div>
       </section>
+
+      <ApplyDialog
+        open={applyFor !== null}
+        onClose={() => setApplyFor(null)}
+        job={applyFor}
+      />
     </PageShell>
   );
 }

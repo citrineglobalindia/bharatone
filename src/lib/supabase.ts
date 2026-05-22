@@ -62,3 +62,34 @@ export type ChatbotMessage = {
   page_path: string | null;
   user_agent: string | null;
 };
+
+
+export type JobApplicationStatus =
+  | "new" | "reviewing" | "shortlisted" | "interview" | "offered" | "rejected" | "withdrawn";
+
+export type JobApplication = {
+  id: string;
+  created_at: string;
+  job_id: string;
+  job_title: string;
+  job_team: string | null;
+  full_name: string;
+  email: string;
+  phone: string;
+  location: string | null;
+  linkedin_url: string | null;
+  portfolio_url: string | null;
+  resume_url: string | null;
+  resume_filename: string | null;
+  total_experience_years: number | null;
+  current_position: string | null;
+  current_company: string | null;
+  experience: string | null;
+  education: string | null;
+  cover_letter: string | null;
+  status: JobApplicationStatus;
+  notes: string | null;
+  reviewed_at: string | null;
+  source: string | null;
+  user_agent: string | null;
+};
