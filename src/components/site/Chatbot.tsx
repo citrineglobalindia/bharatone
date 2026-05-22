@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackChatMessage } from "@/lib/tracking";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 
 type Msg = { role: "bot" | "user"; text: string };
@@ -20,7 +21,7 @@ function botReply(q: string): string {
   if (t.includes("shree") || t.includes("health") || t.includes("card"))
     return "**Shreerakshe Health Card** gives your family:\n- Exclusive discounts at trusted hospitals\n- Affordable quality healthcare\n- Lifesaving access when you need it most\n\nLearn more at shreerakshe.com or call +91 96111 01334.";
   if (t.includes("contact") || t.includes("phone") || t.includes("call") || t.includes("email"))
-    return "📞 **+91 96111 01334**\n✉️ info@mybharatone.com\n📍 Bengaluru, Karnataka\n\nWe're available Mon–Sat, 9 AM – 7 PM.";
+    return "📞 **+91 96111 01334**\n✉️ info@mybharatone.com\n📍 Bharatone Head Office, 10th B Cross, Krishnaraja Puram, Hassan, Karnataka 573201\n\nWe're available Mon–Sat, 9 AM – 7 PM.";
   if (t.includes("scheme"))
     return "We run welfare-driven schemes covering healthcare, education, cooperative society development, and social support. Visit the **Schemes** section to explore and apply.";
   if (t.includes("loan") || t.includes("bank"))
@@ -49,9 +50,14 @@ export function Chatbot() {
     setMessages((m) => [...m, { role: "user", text: q }]);
     setInput("");
     setTyping(true);
+    // Log the user turn
+    trackChatMessage("user", q);
     setTimeout(() => {
-      setMessages((m) => [...m, { role: "bot", text: botReply(q) }]);
+      const reply = botReply(q);
+      setMessages((m) => [...m, { role: "bot", text: reply }]);
       setTyping(false);
+      // Log the assistant turn
+      trackChatMessage("assistant", reply);
     }, 700);
   }
 

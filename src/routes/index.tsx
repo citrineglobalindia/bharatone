@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { VisitorTracker } from "@/components/site/VisitorTracker";
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/site/Navbar";
@@ -40,7 +41,7 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background"><VisitorTracker />
       <AnimatePresence>{loading && <Loader />}</AnimatePresence>
       <Navbar />
       <main className="pt-[64px] md:pt-[112px]">

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { Chatbot } from "@/components/site/Chatbot";
+import { VisitorTracker } from "@/components/site/VisitorTracker";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 
@@ -99,6 +100,7 @@ export function PageShell({
       </main>
       <Footer />
       <Chatbot />
+      <VisitorTracker />
     </div>
   );
 }

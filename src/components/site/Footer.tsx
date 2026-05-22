@@ -367,7 +367,7 @@ export function Footer() {
             </motion.li>
             <motion.li variants={linkVariants} className="flex items-start gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-saffron" />
-              <span>Bengaluru, Karnataka, India</span>
+              <span>10th B Cross, Krishnaraja Puram,<br />Hassan, Karnataka 573201</span>
             </motion.li>
           </motion.ul>
         </motion.div>

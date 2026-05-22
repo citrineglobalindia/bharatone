@@ -16,8 +16,11 @@ import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminVisitorsRouteImport } from './routes/admin/visitors'
 import { Route as AdminResponsesRouteImport } from './routes/admin/responses'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminChatbotRouteImport } from './routes/admin/chatbot'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
@@ -54,6 +57,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminVisitorsRoute = AdminVisitorsRouteImport.update({
+  id: '/admin/visitors',
+  path: '/admin/visitors',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminResponsesRoute = AdminResponsesRouteImport.update({
   id: '/admin/responses',
   path: '/admin/responses',
@@ -64,6 +72,16 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminChatbotRoute = AdminChatbotRouteImport.update({
+  id: '/admin/chatbot',
+  path: '/admin/chatbot',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -72,8 +90,11 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
+  '/admin/chatbot': typeof AdminChatbotRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/responses': typeof AdminResponsesRoute
+  '/admin/visitors': typeof AdminVisitorsRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -83,8 +104,11 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
+  '/admin/chatbot': typeof AdminChatbotRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/responses': typeof AdminResponsesRoute
+  '/admin/visitors': typeof AdminVisitorsRoute
   '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
@@ -95,8 +119,11 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/schemes': typeof SchemesRoute
   '/services': typeof ServicesRoute
+  '/admin/chatbot': typeof AdminChatbotRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/responses': typeof AdminResponsesRoute
+  '/admin/visitors': typeof AdminVisitorsRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -108,8 +135,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/schemes'
     | '/services'
+    | '/admin/chatbot'
+    | '/admin/dashboard'
     | '/admin/login'
     | '/admin/responses'
+    | '/admin/visitors'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -119,8 +149,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/schemes'
     | '/services'
+    | '/admin/chatbot'
+    | '/admin/dashboard'
     | '/admin/login'
     | '/admin/responses'
+    | '/admin/visitors'
     | '/admin'
   id:
     | '__root__'
@@ -130,8 +163,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/schemes'
     | '/services'
+    | '/admin/chatbot'
+    | '/admin/dashboard'
     | '/admin/login'
     | '/admin/responses'
+    | '/admin/visitors'
     | '/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -142,8 +178,11 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   SchemesRoute: typeof SchemesRoute
   ServicesRoute: typeof ServicesRoute
+  AdminChatbotRoute: typeof AdminChatbotRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminResponsesRoute: typeof AdminResponsesRoute
+  AdminVisitorsRoute: typeof AdminVisitorsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -198,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/visitors': {
+      id: '/admin/visitors'
+      path: '/admin/visitors'
+      fullPath: '/admin/visitors'
+      preLoaderRoute: typeof AdminVisitorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/responses': {
       id: '/admin/responses'
       path: '/admin/responses'
@@ -212,6 +258,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/chatbot': {
+      id: '/admin/chatbot'
+      path: '/admin/chatbot'
+      fullPath: '/admin/chatbot'
+      preLoaderRoute: typeof AdminChatbotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -222,8 +282,11 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   SchemesRoute: SchemesRoute,
   ServicesRoute: ServicesRoute,
+  AdminChatbotRoute: AdminChatbotRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminResponsesRoute: AdminResponsesRoute,
+  AdminVisitorsRoute: AdminVisitorsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport

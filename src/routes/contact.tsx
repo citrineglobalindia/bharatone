@@ -38,7 +38,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Get in touch with BharatOne — Bharathone Jana Samparka Kendra in Bengaluru. Call, email, or visit us. We typically respond within one business day.",
+          "Get in touch with BharatOne — our Head Office at 10th B Cross, Krishnaraja Puram, Hassan, Karnataka 573201. Call, email, or visit us. We typically respond within one business day.",
       },
       { property: "og:title", content: "Contact BharatOne" },
       {
@@ -64,11 +64,11 @@ const item: Variants = {
 /* -------------------------------------------------------------------------- */
 /* Constants                                                                  */
 /* -------------------------------------------------------------------------- */
-const OFFICE_ADDRESS = "Bharathone Jana Samparka Kendra, Bengaluru, Karnataka";
+const OFFICE_ADDRESS = "Bharatone Head Office, 10th B Cross, Krishnaraja Puram, Hassan, Karnataka 573201";
 const MAP_DIRECTIONS_URL =
-  "https://www.google.com/maps/dir/?api=1&destination=Bharathone+Jana+samprka+kendra&destination_place_id=ChIJmWdPAjIPrjsRKGW4iuj4SJo";
+  "https://www.google.com/maps/dir/?api=1&destination=Bharatone+Head+Office%2C+10th+B+Cross%2C+Krishnaraja+Puram%2C+Hassan%2C+Karnataka+573201";
 const MAP_EMBED_SRC =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.538867974229!2d77.74663869999999!3d13.001319299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0f32024f6799%3A0x9a48f8ea8ab86528!2sBharathone%20Jana%20samprka%20kendra!5e0!3m2!1sen!2sin!4v1779473751599!5m2!1sen!2sin";
+  "https://www.google.com/maps?q=Bharatone+Head+Office%2C+10th+B+Cross%2C+Krishnaraja+Puram%2C+Hassan%2C+Karnataka+573201&output=embed";
 
 const contactCards = [
   {
@@ -90,8 +90,8 @@ const contactCards = [
   {
     icon: MapPin,
     label: "Visit Us",
-    value: "Jana Samparka Kendra",
-    sub: "Bengaluru, Karnataka",
+    value: "Head Office",
+    sub: "Hassan, Karnataka",
     href: "#location",
     accent: "from-[var(--ashoka)] to-[color-mix(in_oklab,var(--ashoka),white_20%)]",
   },
@@ -397,10 +397,10 @@ function ContactPage() {
               Head Office
             </div>
             <h3 className="font-display text-xl font-bold leading-tight">
-              Bharathone Jana Samparka Kendra
+              Bharatone Head Office
             </h3>
             <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-              Visit our flagship Jana Samparka Kendra — the single point of contact for citizens
+              Visit our Head Office in Hassan — the single point of contact for citizens
               accessing 100+ services across Karnataka and beyond.
             </p>
             <div className="mt-4 space-y-2 text-sm">
@@ -503,7 +503,7 @@ function ContactPage() {
         >
           {/* Map iframe */}
           <iframe
-            title="Bharathone Jana Samparka Kendra — Google Maps"
+            title="Bharatone Head Office, Hassan — Google Maps"
             src={MAP_EMBED_SRC}
             className="absolute inset-0 h-full w-full"
             style={{ border: 0 }}
@@ -524,7 +524,7 @@ function ContactPage() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-saffron opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-saffron" />
               </span>
-              <span className="text-xs font-semibold">Bharathone Jana Samparka Kendra</span>
+              <span className="text-xs font-semibold">Bharatone Head Office, Hassan</span>
             </div>
           </motion.div>
         </motion.div>
