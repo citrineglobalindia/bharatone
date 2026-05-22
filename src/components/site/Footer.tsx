@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Globe, AtSign, Hash, Send, Link as LinkIcon } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import logo from "@/assets/bharatone-logo.png";
 const Facebook = Globe;
 const Instagram = AtSign;
