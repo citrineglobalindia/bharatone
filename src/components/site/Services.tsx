@@ -49,15 +49,15 @@ export function Services() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: (i % 6) * 0.06 }}
               whileHover={{ y: -6 }}
-              className="group relative p-6 rounded-2xl bg-card border border-border hover:border-saffron/40 hover:shadow-elegant transition-all overflow-hidden"
+              className="group relative p-4 sm:p-6 rounded-2xl bg-card border border-border hover:border-saffron/40 hover:shadow-elegant transition-all overflow-hidden"
             >
               <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-saffron/10 group-hover:bg-saffron/20 transition-colors" />
               <div className="relative">
-                <div className="h-12 w-12 rounded-xl bg-gradient-saffron flex items-center justify-center text-primary-foreground shadow-soft mb-4">
-                  <s.icon className="h-6 w-6" />
+                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-saffron flex items-center justify-center text-primary-foreground shadow-soft mb-3 sm:mb-4">
+                  <s.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <h3 className="font-display font-semibold text-lg mb-1.5">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                <h3 className="font-display font-semibold text-sm sm:text-lg mb-1 sm:mb-1.5">{s.title}</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                 <div className="mt-4 flex items-center gap-1 text-sm font-medium text-saffron opacity-0 group-hover:opacity-100 transition-opacity">
                   Learn more <ArrowRight className="h-3.5 w-3.5" />
                 </div>
