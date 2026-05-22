@@ -327,6 +327,10 @@ export function Navbar() {
 
             {/* Drawer panel */}
             <motion.aside
+              id="mobile-drawer"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Main menu"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -337,7 +341,7 @@ export function Navbar() {
               onDragEnd={(_, info) => {
                 if (info.offset.x > 80 || info.velocity.x > 500) setOpen(false);
               }}
-              className="absolute top-0 right-0 h-full w-[85%] max-w-sm bg-background shadow-elegant flex flex-col overflow-hidden"
+              className="absolute top-0 right-0 h-dvh w-[85%] max-w-sm bg-background shadow-elegant flex flex-col overflow-hidden [padding-top:env(safe-area-inset-top)] [padding-bottom:env(safe-area-inset-bottom)] [padding-right:env(safe-area-inset-right)]"
             >
               {/* Tricolor accent */}
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[var(--saffron)] via-white to-[var(--india-green)]" />
