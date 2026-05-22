@@ -140,27 +140,31 @@ export function Navbar() {
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: hidden ? -120 : 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed inset-x-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-x-0 z-50 transition-all duration-300 [padding-top:env(safe-area-inset-top)] [padding-left:env(safe-area-inset-left)] [padding-right:env(safe-area-inset-right)] ${
           scrolled
             ? "top-0 glass border-b border-border/60 shadow-soft py-2"
-            : "top-0 md:top-[38px] bg-background/95 md:bg-transparent backdrop-blur md:backdrop-blur-0 border-b border-border/40 md:border-0 py-2 md:py-3"
+            : "top-0 md:top-[38px] bg-background/95 md:bg-transparent backdrop-blur md:backdrop-blur-0 border-b border-border/40 md:border-0 py-2.5 md:py-3"
         }`}
         onMouseLeave={() => setOpenMega(null)}
       >
-        <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
+        <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between gap-3 sm:gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group shrink-0">
+          <Link
+            to="/"
+            aria-label="BharatOne — Home"
+            className="flex items-center gap-2.5 group shrink-0 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[var(--saffron)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
             <motion.div
               whileHover={{ rotate: -3 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="relative"
             >
               <div className="absolute -inset-2 bg-gradient-to-tr from-[var(--saffron)]/30 to-[var(--india-green)]/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-              <img src={logo} alt="BharatOne" className="relative h-9 sm:h-11 w-auto" />
+              <img src={logo} alt="" aria-hidden="true" className="relative h-9 sm:h-11 w-auto" />
             </motion.div>
             <div className="flex flex-col leading-tight">
-              <span className="font-display font-bold text-sm sm:text-base tracking-tight whitespace-pre-wrap">
-                {"BharatOne\n"}
+              <span className="font-display font-bold text-sm sm:text-base tracking-tight">
+                Bharat<span className="text-[var(--saffron)]">One</span>
               </span>
               <span className="hidden sm:block text-[10px] text-muted-foreground tracking-wider uppercase">
                 Serving Citizens
