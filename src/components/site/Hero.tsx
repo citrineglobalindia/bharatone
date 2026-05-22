@@ -6,7 +6,7 @@ import heroImg from "@/assets/hero-citizens.jpg";
 
 export function Hero() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-hero">
+    <section id="home" className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-gradient-hero">
       {/* decorative tricolor blobs */}
       <motion.div
         aria-hidden
