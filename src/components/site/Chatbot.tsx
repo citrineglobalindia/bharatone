@@ -62,112 +62,141 @@ export function Chatbot() {
         animate={{ scale: 1 }}
         transition={{ delay: 1.5, type: "spring" }}
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full bg-gradient-saffron text-primary-foreground shadow-glow flex items-center justify-center hover:scale-110 transition-transform"
+        className={`fixed z-40 h-14 w-14 rounded-full bg-gradient-to-br from-[var(--saffron)] to-[var(--india-green)] text-white shadow-glow flex items-center justify-center hover:scale-110 transition-transform bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-5 ${open ? "opacity-0 pointer-events-none" : ""}`}
         aria-label="Open chat"
       >
-        <MessageCircle className="h-6 w-6" />
-        <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-india-green ring-2 ring-background animate-pulse" />
+        <span className="absolute inset-0 rounded-full bg-[var(--saffron)] animate-ping opacity-30" />
+        <MessageCircle className="relative h-6 w-6" />
+        <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-[var(--india-green)] ring-2 ring-background animate-pulse" />
       </motion.button>
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.95 }}
-            transition={{ duration: 0.25 }}
-            className="fixed bottom-5 right-5 z-50 w-[min(380px,calc(100vw-2.5rem))] h-[min(560px,calc(100vh-2.5rem))] bg-card rounded-2xl shadow-elegant border border-border flex flex-col overflow-hidden"
-          >
-            <div className="bg-gradient-saffron text-primary-foreground px-4 py-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="h-9 w-9 rounded-full bg-white/20 flex items-center justify-center">
-                  <Sparkles className="h-4 w-4" />
-                </div>
-                <div>
-                  <div className="font-semibold text-sm">BharatOne Assistant</div>
-                  <div className="text-[11px] opacity-90 flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-india-green" /> Online
+          <>
+            {/* Mobile backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-40 bg-foreground/40 backdrop-blur-sm sm:hidden"
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 30, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
+              className="fixed z-50 bg-card border border-border flex flex-col overflow-hidden shadow-elegant
+                inset-x-0 bottom-0 top-16 rounded-t-3xl
+                sm:inset-auto sm:top-auto sm:bottom-5 sm:right-5 sm:w-[400px] sm:h-[600px] sm:max-h-[calc(100vh-2.5rem)] sm:rounded-2xl"
+            >
+              {/* Header */}
+              <div className="bg-gradient-to-br from-[var(--saffron)] to-[var(--india-green)] text-white px-4 py-3 flex items-center justify-between shrink-0">
+                <div className="flex items-center gap-2.5">
+                  <div className="h-10 w-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center">
+                    <Sparkles className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-sm">BharatOne Assistant</div>
+                    <div className="text-[11px] opacity-90 flex items-center gap-1">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+                      </span>
+                      Online · Replies instantly
+                    </div>
                   </div>
                 </div>
-              </div>
-              <button onClick={() => setOpen(false)} className="p-1 rounded-full hover:bg-white/20">
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-muted/30">
-              {messages.map((m, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+                <button
+                  onClick={() => setOpen(false)}
+                  className="h-9 w-9 rounded-full hover:bg-white/20 flex items-center justify-center transition-colors"
+                  aria-label="Close chat"
                 >
-                  <div
-                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm whitespace-pre-line ${
-                      m.role === "user"
-                        ? "bg-gradient-saffron text-primary-foreground rounded-br-sm"
-                        : "bg-card border border-border rounded-bl-sm"
-                    }`}
-                    dangerouslySetInnerHTML={{
-                      __html: m.text
-                        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-                        .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" class="underline">$1</a>'),
-                    }}
-                  />
-                </motion.div>
-              ))}
-              {typing && (
-                <div className="flex justify-start">
-                  <div className="bg-card border border-border rounded-2xl rounded-bl-sm px-4 py-3 flex gap-1">
-                    {[0, 0.15, 0.3].map((d) => (
-                      <motion.span
-                        key={d}
-                        animate={{ y: [0, -4, 0] }}
-                        transition={{ repeat: Infinity, duration: 0.8, delay: d }}
-                        className="h-1.5 w-1.5 rounded-full bg-muted-foreground"
-                      />
-                    ))}
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Messages */}
+              <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 space-y-3 bg-muted/30">
+                {messages.map((m, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    <div
+                      className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm whitespace-pre-line shadow-sm ${
+                        m.role === "user"
+                          ? "bg-gradient-to-br from-[var(--saffron)] to-[var(--india-green)] text-white rounded-br-sm"
+                          : "bg-card border border-border rounded-bl-sm"
+                      }`}
+                      dangerouslySetInnerHTML={{
+                        __html: m.text
+                          .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+                          .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" class="underline">$1</a>')
+                          .replace(/\n/g, "<br/>"),
+                      }}
+                    />
+                  </motion.div>
+                ))}
+                {typing && (
+                  <div className="flex justify-start">
+                    <div className="bg-card border border-border rounded-2xl rounded-bl-sm px-4 py-3 flex gap-1">
+                      {[0, 0.15, 0.3].map((d) => (
+                        <motion.span
+                          key={d}
+                          animate={{ y: [0, -4, 0] }}
+                          transition={{ repeat: Infinity, duration: 0.8, delay: d }}
+                          className="h-1.5 w-1.5 rounded-full bg-muted-foreground"
+                        />
+                      ))}
+                    </div>
                   </div>
+                )}
+                <div ref={endRef} />
+              </div>
+
+              {/* Quick replies */}
+              {messages.length <= 2 && (
+                <div className="px-3 pb-2 pt-1 flex flex-wrap gap-1.5 shrink-0 bg-muted/30">
+                  {QUICK.map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => send(q)}
+                      className="text-xs px-2.5 py-1.5 rounded-full bg-card hover:bg-[var(--saffron)]/15 hover:text-[var(--saffron)] border border-border transition-colors"
+                    >
+                      {q}
+                    </button>
+                  ))}
                 </div>
               )}
-              <div ref={endRef} />
-            </div>
 
-            {messages.length <= 2 && (
-              <div className="px-3 pb-2 flex flex-wrap gap-1.5">
-                {QUICK.map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => send(q)}
-                    className="text-xs px-2.5 py-1.5 rounded-full bg-muted hover:bg-saffron/15 hover:text-saffron border border-border transition-colors"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            <form
-              onSubmit={(e) => { e.preventDefault(); send(input); }}
-              className="border-t border-border p-2 flex gap-2 bg-card"
-            >
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask anything…"
-                className="flex-1 px-3 py-2 text-sm rounded-xl bg-muted focus:outline-none focus:ring-2 focus:ring-saffron"
-              />
-              <button
-                type="submit"
-                className="h-9 w-9 rounded-xl bg-gradient-saffron text-primary-foreground flex items-center justify-center hover:scale-105 transition-transform"
+              {/* Input */}
+              <form
+                onSubmit={(e) => { e.preventDefault(); send(input); }}
+                className="border-t border-border p-2 flex gap-2 bg-card shrink-0 pb-[max(0.5rem,env(safe-area-inset-bottom))]"
               >
-                <Send className="h-4 w-4" />
-              </button>
-            </form>
-          </motion.div>
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Ask anything…"
+                  className="flex-1 px-3 py-2.5 text-sm rounded-xl bg-muted focus:outline-none focus:ring-2 focus:ring-[var(--saffron)]"
+                />
+                <button
+                  type="submit"
+                  aria-label="Send"
+                  className="h-10 w-10 shrink-0 rounded-xl bg-gradient-to-br from-[var(--saffron)] to-[var(--india-green)] text-white flex items-center justify-center hover:scale-105 transition-transform disabled:opacity-50"
+                  disabled={!input.trim()}
+                >
+                  <Send className="h-4 w-4" />
+                </button>
+              </form>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
   );
 }
+
