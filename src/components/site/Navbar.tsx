@@ -34,21 +34,14 @@ export function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="relative h-9 w-9 rounded-xl overflow-hidden shadow-soft">
-            <div className="absolute inset-0 flex flex-col">
-              <div className="flex-1 bg-saffron" />
-              <div className="flex-1 bg-white" />
-              <div className="flex-1 bg-india-green" />
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-2 w-2 rounded-full border border-ashoka" />
-            </div>
-          </div>
-          <div className="leading-tight">
-            <div className="font-display font-bold text-lg">BharatOne</div>
-            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">For Indian Citizens</div>
-          </div>
+        <Link to="/" className="flex items-center gap-2.5 group">
+          <motion.img
+            src={logo}
+            alt="BharatOne — For Serving Indian Citizens"
+            className="h-9 sm:h-10 w-auto"
+            whileHover={{ scale: 1.05, rotate: -2 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
