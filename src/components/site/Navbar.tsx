@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 
 const links = [
   { label: "Home", to: "/" },
-  { label: "About", to: "/about" },
-  { label: "Services", to: "/services" },
-  { label: "Schemes", to: "/schemes" },
-  { label: "Contact", to: "/contact" },
+  { label: "About", to: "/#about" },
+  { label: "Services", to: "/#services" },
+  { label: "Schemes", to: "/#schemes" },
+  { label: "Contact", to: "/#contact" },
 ];
 
 export function Navbar() {
