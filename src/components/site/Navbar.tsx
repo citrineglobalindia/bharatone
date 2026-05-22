@@ -90,14 +90,14 @@ export function Navbar() {
           >
             <div className="container mx-auto px-4 py-4 flex flex-col gap-1">
               {links.map((l) => (
-                <Link
+                <a
                   key={l.to}
-                  to={l.to}
+                  href={l.to}
                   onClick={() => setOpen(false)}
                   className="px-3 py-3 rounded-lg text-base font-medium hover:bg-muted"
                 >
                   {l.label}
-                </Link>
+                </a>
               ))}
               <Button className="mt-2 bg-gradient-saffron text-primary-foreground">
                 Register Your Center
