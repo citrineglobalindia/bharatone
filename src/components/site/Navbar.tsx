@@ -52,14 +52,13 @@ export function Navbar() {
 
         <nav className="hidden md:flex items-center gap-1">
           {links.map((l) => (
-            <Link
+            <a
               key={l.to}
-              to={l.to}
+              href={l.to}
               className="px-4 py-2 text-sm font-medium text-foreground/80 rounded-lg hover:bg-muted hover:text-foreground transition-colors"
-              activeProps={{ className: "text-primary" }}
             >
               {l.label}
-            </Link>
+            </a>
           ))}
         </nav>
 
