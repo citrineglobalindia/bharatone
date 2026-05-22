@@ -329,14 +329,6 @@ export function Navbar() {
               <div className="relative flex items-center justify-between px-6 pt-6 pb-4 border-b border-border/60">
                 <div className="flex items-center gap-2.5">
                   <img src={logo} alt="BharatOne" className="h-9 w-auto" />
-                  <div className="flex flex-col leading-tight">
-                    <span className="font-display font-bold text-sm">
-                      Bharat<span className="text-[var(--saffron)]">One</span>
-                    </span>
-                    <span className="text-[10px] text-muted-foreground tracking-wider uppercase">
-                      Menu
-                    </span>
-                  </div>
                 </div>
                 <button
                   onClick={() => setOpen(false)}
