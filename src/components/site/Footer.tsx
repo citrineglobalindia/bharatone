@@ -50,9 +50,9 @@ export function Footer() {
         <div>
           <h4 className="font-semibold mb-4">Reach Us</h4>
           <ul className="space-y-3 text-sm opacity-80">
-            <li className="flex items-start gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0" /> +91 96111 01334</li>
-            <li className="flex items-start gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0" /> info@mybharatone.com</li>
-            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Bengaluru, Karnataka, India</li>
+            <li className="flex items-start gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0" /><span>+91 96111 01334</span></li>
+            <li className="flex items-start gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0" /><span>info@mybharatone.com</span></li>
+            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0" /><span>Bengaluru, Karnataka, India</span></li>
           </ul>
         </div>
       </div>
