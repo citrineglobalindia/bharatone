@@ -231,9 +231,11 @@ export function Navbar() {
             </Button>
 
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-muted relative z-[70]"
+              className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-lg hover:bg-muted relative z-[70] outline-none focus-visible:ring-2 focus-visible:ring-[var(--saffron)] focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
               onClick={() => setOpen((v) => !v)}
-              aria-label="Toggle menu"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="mobile-drawer"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -243,6 +245,7 @@ export function Navbar() {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   className="block"
+                  aria-hidden="true"
                 >
                   {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                 </motion.span>
