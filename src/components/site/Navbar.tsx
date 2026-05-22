@@ -156,13 +156,13 @@ export function Navbar() {
               className="relative"
             >
               <div className="absolute -inset-2 bg-gradient-to-tr from-[var(--saffron)]/30 to-[var(--india-green)]/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-              <img src={logo} alt="BharatOne" className="relative h-10 sm:h-11 w-auto" />
+              <img src={logo} alt="BharatOne" className="relative h-9 sm:h-11 w-auto" />
             </motion.div>
-            <div className="hidden sm:flex flex-col leading-tight">
-              <span className="font-display font-bold text-base tracking-tight">
+            <div className="flex flex-col leading-tight">
+              <span className="font-display font-bold text-sm sm:text-base tracking-tight">
                 Bharat<span className="text-[var(--saffron)]">One</span>
               </span>
-              <span className="text-[10px] text-muted-foreground tracking-wider uppercase">
+              <span className="hidden sm:block text-[10px] text-muted-foreground tracking-wider uppercase">
                 Serving Citizens
               </span>
             </div>
