@@ -143,7 +143,7 @@ export function Navbar() {
         className={`fixed inset-x-0 z-50 transition-all duration-300 ${
           scrolled
             ? "top-0 glass border-b border-border/60 shadow-soft py-2"
-            : "top-0 md:top-[38px] bg-transparent py-3"
+            : "top-0 md:top-[38px] bg-background/95 md:bg-transparent backdrop-blur md:backdrop-blur-0 border-b border-border/40 md:border-0 py-2 md:py-3"
         }`}
         onMouseLeave={() => setOpenMega(null)}
       >
