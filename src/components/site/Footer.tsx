@@ -1,4 +1,9 @@
-import { Facebook, Instagram, Linkedin, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, AtSign, Hash, Send, Link as LinkIcon } from "lucide-react";
+const Facebook = Globe;
+const Instagram = AtSign;
+const Twitter = Hash;
+const Youtube = Send;
+const Linkedin = LinkIcon;
 
 export function Footer() {
   return (
