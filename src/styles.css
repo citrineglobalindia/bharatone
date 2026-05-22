@@ -173,3 +173,8 @@
 }
 
 .animate-float { animation: float 6s ease-in-out infinite; }
+
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 96px; }
+@media (min-width: 768px) { section[id] { scroll-margin-top: 124px; } }
+
