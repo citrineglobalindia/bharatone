@@ -291,8 +291,6 @@ export function Navbar() {
         />
       </motion.header>
 
-      {/* Spacer */}
-      <div className={scrolled ? "h-16" : "h-20 md:h-[110px]"} />
 
       {/* Mobile fullscreen menu */}
       <AnimatePresence>
