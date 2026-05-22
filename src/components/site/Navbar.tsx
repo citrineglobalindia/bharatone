@@ -260,9 +260,9 @@ export function Navbar() {
                 >
                   <div className="glass rounded-2xl border border-border/60 shadow-elegant p-6 grid grid-cols-2 md:grid-cols-3 gap-2">
                     {link.mega.map((m) => (
-                      <a
+                      <Link
                         key={m.title}
-                        href={m.to}
+                        to={m.to}
                         onClick={() => setOpenMega(null)}
                         className="group flex items-start gap-3 p-3 rounded-xl hover:bg-muted/70 transition-colors"
                       >
@@ -273,7 +273,7 @@ export function Navbar() {
                           <div className="text-sm font-semibold">{m.title}</div>
                           <div className="text-xs text-muted-foreground">{m.desc}</div>
                         </div>
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </motion.div>
