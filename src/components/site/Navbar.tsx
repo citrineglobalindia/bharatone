@@ -93,8 +93,14 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
@@ -140,27 +146,31 @@ export function Navbar() {
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: hidden ? -120 : 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed inset-x-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-x-0 z-50 transition-all duration-300 [padding-top:env(safe-area-inset-top)] [padding-left:env(safe-area-inset-left)] [padding-right:env(safe-area-inset-right)] ${
           scrolled
             ? "top-0 glass border-b border-border/60 shadow-soft py-2"
-            : "top-0 md:top-[38px] bg-background/95 md:bg-transparent backdrop-blur md:backdrop-blur-0 border-b border-border/40 md:border-0 py-2 md:py-3"
+            : "top-0 md:top-[38px] bg-background/95 md:bg-transparent backdrop-blur md:backdrop-blur-0 border-b border-border/40 md:border-0 py-2.5 md:py-3"
         }`}
         onMouseLeave={() => setOpenMega(null)}
       >
-        <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
+        <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between gap-3 sm:gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group shrink-0">
+          <Link
+            to="/"
+            aria-label="BharatOne — Home"
+            className="flex items-center gap-2.5 group shrink-0 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[var(--saffron)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
             <motion.div
               whileHover={{ rotate: -3 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="relative"
             >
               <div className="absolute -inset-2 bg-gradient-to-tr from-[var(--saffron)]/30 to-[var(--india-green)]/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-              <img src={logo} alt="BharatOne" className="relative h-9 sm:h-11 w-auto" />
+              <img src={logo} alt="" aria-hidden="true" className="relative h-9 sm:h-11 w-auto" />
             </motion.div>
             <div className="flex flex-col leading-tight">
-              <span className="font-display font-bold text-sm sm:text-base tracking-tight whitespace-pre-wrap">
-                {"BharatOne\n"}
+              <span className="font-display font-bold text-sm sm:text-base tracking-tight">
+                Bharat<span className="text-[var(--saffron)]">One</span>
               </span>
               <span className="hidden sm:block text-[10px] text-muted-foreground tracking-wider uppercase">
                 Serving Citizens
@@ -227,9 +237,11 @@ export function Navbar() {
             </Button>
 
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-muted relative z-[70]"
+              className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-lg hover:bg-muted relative z-[70] outline-none focus-visible:ring-2 focus-visible:ring-[var(--saffron)] focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
               onClick={() => setOpen((v) => !v)}
-              aria-label="Toggle menu"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="mobile-drawer"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -239,6 +251,7 @@ export function Navbar() {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   className="block"
+                  aria-hidden="true"
                 >
                   {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                 </motion.span>
@@ -314,6 +327,10 @@ export function Navbar() {
 
             {/* Drawer panel */}
             <motion.aside
+              id="mobile-drawer"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Main menu"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -324,7 +341,7 @@ export function Navbar() {
               onDragEnd={(_, info) => {
                 if (info.offset.x > 80 || info.velocity.x > 500) setOpen(false);
               }}
-              className="absolute top-0 right-0 h-full w-[85%] max-w-sm bg-background shadow-elegant flex flex-col overflow-hidden"
+              className="absolute top-0 right-0 h-dvh w-[85%] max-w-sm bg-background shadow-elegant flex flex-col overflow-hidden [padding-top:env(safe-area-inset-top)] [padding-bottom:env(safe-area-inset-bottom)] [padding-right:env(safe-area-inset-right)]"
             >
               {/* Tricolor accent */}
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[var(--saffron)] via-white to-[var(--india-green)]" />
