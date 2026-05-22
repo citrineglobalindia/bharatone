@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence, useScroll, useSpring, useMotionValueEvent } from "framer-motion";
 import {
   Menu,
@@ -30,30 +30,31 @@ type NavLink = {
 };
 
 const links: NavLink[] = [
-  { label: "Home", to: "/#home" },
-  { label: "About", to: "/#about" },
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
   {
     label: "Services",
-    to: "/#services",
+    to: "/services",
     mega: [
-      { icon: ShieldCheck, title: "Aadhaar & PAN", desc: "Enrolment, updates & linking", to: "/#services" },
-      { icon: HeartPulse, title: "Ayushman Bharat", desc: "Health card & insurance", to: "/#services" },
-      { icon: GraduationCap, title: "Education", desc: "Scholarships & admissions", to: "/#services" },
-      { icon: Banknote, title: "Banking & DBT", desc: "Jan Dhan, pensions, subsidies", to: "/#services" },
-      { icon: Tractor, title: "Farmer Services", desc: "PM-KISAN, crop insurance", to: "/#services" },
-      { icon: Briefcase, title: "Employment", desc: "Skill India, MGNREGA, jobs", to: "/#services" },
+      { icon: ShieldCheck, title: "Aadhaar & PAN", desc: "Enrolment, updates & linking", to: "/services" },
+      { icon: HeartPulse, title: "Ayushman Bharat", desc: "Health card & insurance", to: "/services" },
+      { icon: GraduationCap, title: "Education", desc: "Scholarships & admissions", to: "/services" },
+      { icon: Banknote, title: "Banking & DBT", desc: "Jan Dhan, pensions, subsidies", to: "/services" },
+      { icon: Tractor, title: "Farmer Services", desc: "PM-KISAN, crop insurance", to: "/services" },
+      { icon: Briefcase, title: "Employment", desc: "Skill India, MGNREGA, jobs", to: "/careers" },
     ],
   },
   {
     label: "Schemes",
-    to: "/#schemes",
+    to: "/schemes",
     mega: [
-      { icon: Users, title: "Welfare Schemes", desc: "Central & state benefits", to: "/#schemes" },
-      { icon: FileText, title: "Certificates", desc: "Income, caste, domicile", to: "/#schemes" },
-      { icon: Sparkles, title: "New Launches", desc: "Latest govt. programs", to: "/#schemes" },
+      { icon: Users, title: "Welfare Schemes", desc: "Central & state benefits", to: "/schemes" },
+      { icon: FileText, title: "Certificates", desc: "Income, caste, domicile", to: "/services" },
+      { icon: Sparkles, title: "New Launches", desc: "Latest govt. programs", to: "/schemes" },
     ],
   },
-  { label: "Contact", to: "/#contact" },
+  { label: "Careers", to: "/careers" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export function Navbar() {
@@ -62,7 +63,8 @@ export function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const [openMega, setOpenMega] = useState<string | null>(null);
-  const [active, setActive] = useState("/#home");
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const active = pathname === "/" ? "/" : "/" + pathname.split("/").filter(Boolean)[0];
 
   const { scrollY, scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, mass: 0.2 });
@@ -72,24 +74,6 @@ export function Navbar() {
     setScrolled(latest > 20);
     setHidden(latest > prev && latest > 200 && !open && !openMega);
   });
-
-  // Active section tracking
-  useEffect(() => {
-    const ids = ["home", "about", "services", "schemes", "contact"];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(`/#${e.target.id}`);
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -195,8 +179,8 @@ export function Navbar() {
                     setOpenMega(l.mega ? l.label : null);
                   }}
                 >
-                  <a
-                    href={l.to}
+                  <Link
+                    to={l.to}
                     className="relative px-4 py-2 text-sm font-medium rounded-lg flex items-center gap-1 transition-colors text-foreground/75 hover:text-foreground"
                   >
                     {isHover && (
@@ -215,7 +199,7 @@ export function Navbar() {
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
-                  </a>
+                  </Link>
                 </div>
               );
             })}
@@ -276,9 +260,9 @@ export function Navbar() {
                 >
                   <div className="glass rounded-2xl border border-border/60 shadow-elegant p-6 grid grid-cols-2 md:grid-cols-3 gap-2">
                     {link.mega.map((m) => (
-                      <a
+                      <Link
                         key={m.title}
-                        href={m.to}
+                        to={m.to}
                         onClick={() => setOpenMega(null)}
                         className="group flex items-start gap-3 p-3 rounded-xl hover:bg-muted/70 transition-colors"
                       >
@@ -289,7 +273,7 @@ export function Navbar() {
                           <div className="text-sm font-semibold">{m.title}</div>
                           <div className="text-xs text-muted-foreground">{m.desc}</div>
                         </div>
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </motion.div>
@@ -385,31 +369,34 @@ export function Navbar() {
                   {links.map((l, i) => {
                     const isActive = active === l.to;
                     return (
-                      <motion.a
+                      <motion.div
                         key={l.label}
-                        href={l.to}
-                        onClick={() => setOpen(false)}
                         variants={{
                           hidden: { x: 30, opacity: 0 },
                           show: { x: 0, opacity: 1 },
                         }}
-                        className={`group flex items-center justify-between py-4 border-b border-border/50 transition-colors ${
-                          isActive ? "text-foreground" : "text-foreground/85"
-                        }`}
                       >
-                        <span className="flex items-center gap-3">
-                          <span className="text-[11px] font-mono text-muted-foreground w-6">
-                            0{i + 1}
+                        <Link
+                          to={l.to}
+                          onClick={() => setOpen(false)}
+                          className={`group flex items-center justify-between py-4 border-b border-border/50 transition-colors ${
+                            isActive ? "text-foreground" : "text-foreground/85"
+                          }`}
+                        >
+                          <span className="flex items-center gap-3">
+                            <span className="text-[11px] font-mono text-muted-foreground w-6">
+                              0{i + 1}
+                            </span>
+                            <span className="text-xl font-display font-semibold">
+                              {l.label}
+                            </span>
+                            {isActive && (
+                              <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)]" />
+                            )}
                           </span>
-                          <span className="text-xl font-display font-semibold">
-                            {l.label}
-                          </span>
-                          {isActive && (
-                            <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)]" />
-                          )}
-                        </span>
-                        <ArrowRight className="h-4 w-4 text-muted-foreground -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" />
-                      </motion.a>
+                          <ArrowRight className="h-4 w-4 text-muted-foreground -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" />
+                        </Link>
+                      </motion.div>
                     );
                   })}
                 </motion.nav>
