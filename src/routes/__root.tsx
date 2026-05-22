@@ -72,18 +72,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "BharatOne" },
-      { name: "description", content: "Empowering Indian Citizens with Easy Access to Services" },
+      { title: "Lovable App" },
+      { name: "description", content: "Lovable Generated Project" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "BharatOne" },
-      { property: "og:description", content: "Empowering Indian Citizens with Easy Access to Services" },
+      { property: "og:title", content: "Lovable App" },
+      { property: "og:description", content: "Lovable Generated Project" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "BharatOne" },
-      { name: "twitter:description", content: "Empowering Indian Citizens with Easy Access to Services" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6cd4d001-f18c-4b5a-8f3e-b93da56bb893" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6cd4d001-f18c-4b5a-8f3e-b93da56bb893" },
     ],
     links: [
       {
