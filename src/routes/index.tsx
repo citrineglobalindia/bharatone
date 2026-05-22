@@ -43,10 +43,8 @@ function Index() {
     <div className="min-h-screen bg-background">
       <AnimatePresence>{loading && <Loader />}</AnimatePresence>
       <Navbar />
-      <main>
-        <div className="pt-[60px]">
-          <HeadlinesMarquee />
-        </div>
+      <main className="pt-[64px] md:pt-[112px]">
+        <HeadlinesMarquee />
         <Hero />
         <Stats />
         <Services />
