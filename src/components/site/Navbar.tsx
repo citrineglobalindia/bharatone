@@ -369,31 +369,34 @@ export function Navbar() {
                   {links.map((l, i) => {
                     const isActive = active === l.to;
                     return (
-                      <motion.a
+                      <motion.div
                         key={l.label}
-                        href={l.to}
-                        onClick={() => setOpen(false)}
                         variants={{
                           hidden: { x: 30, opacity: 0 },
                           show: { x: 0, opacity: 1 },
                         }}
-                        className={`group flex items-center justify-between py-4 border-b border-border/50 transition-colors ${
-                          isActive ? "text-foreground" : "text-foreground/85"
-                        }`}
                       >
-                        <span className="flex items-center gap-3">
-                          <span className="text-[11px] font-mono text-muted-foreground w-6">
-                            0{i + 1}
+                        <Link
+                          to={l.to}
+                          onClick={() => setOpen(false)}
+                          className={`group flex items-center justify-between py-4 border-b border-border/50 transition-colors ${
+                            isActive ? "text-foreground" : "text-foreground/85"
+                          }`}
+                        >
+                          <span className="flex items-center gap-3">
+                            <span className="text-[11px] font-mono text-muted-foreground w-6">
+                              0{i + 1}
+                            </span>
+                            <span className="text-xl font-display font-semibold">
+                              {l.label}
+                            </span>
+                            {isActive && (
+                              <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)]" />
+                            )}
                           </span>
-                          <span className="text-xl font-display font-semibold">
-                            {l.label}
-                          </span>
-                          {isActive && (
-                            <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)]" />
-                          )}
-                        </span>
-                        <ArrowRight className="h-4 w-4 text-muted-foreground -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" />
-                      </motion.a>
+                          <ArrowRight className="h-4 w-4 text-muted-foreground -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" />
+                        </Link>
+                      </motion.div>
                     );
                   })}
                 </motion.nav>
