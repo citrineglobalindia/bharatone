@@ -63,7 +63,8 @@ export function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const [openMega, setOpenMega] = useState<string | null>(null);
-  const [active, setActive] = useState("/#home");
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const active = pathname === "/" ? "/" : "/" + pathname.split("/").filter(Boolean)[0];
 
   const { scrollY, scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, mass: 0.2 });
@@ -73,24 +74,6 @@ export function Navbar() {
     setScrolled(latest > 20);
     setHidden(latest > prev && latest > 200 && !open && !openMega);
   });
-
-  // Active section tracking
-  useEffect(() => {
-    const ids = ["home", "about", "services", "schemes", "contact"];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(`/#${e.target.id}`);
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
