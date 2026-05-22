@@ -30,10 +30,10 @@ export function Footer() {
         <div>
           <h4 className="font-semibold mb-4">Company</h4>
           <ul className="space-y-2 text-sm opacity-80">
-            <li><a href="/about" className="hover:text-saffron">About Us</a></li>
-            <li><a href="/services" className="hover:text-saffron">Services</a></li>
-            <li><a href="/schemes" className="hover:text-saffron">Schemes</a></li>
-            <li><a href="/contact" className="hover:text-saffron">Careers</a></li>
+            <li><Link to="/about" className="hover:text-saffron">About Us</Link></li>
+            <li><Link to="/services" className="hover:text-saffron">Services</Link></li>
+            <li><Link to="/schemes" className="hover:text-saffron">Schemes</Link></li>
+            <li><Link to="/careers" className="hover:text-saffron">Careers</Link></li>
           </ul>
         </div>
 
