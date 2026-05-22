@@ -9,7 +9,7 @@ const Linkedin = LinkIcon;
 export function Footer() {
   return (
     <footer className="bg-foreground text-background mt-24">
-      <div className="container mx-auto px-4 sm:px-6 py-16 grid gap-10 md:grid-cols-4">
+      <div className="container mx-auto px-4 sm:px-6 py-16 grid gap-10 grid-cols-2 md:grid-cols-4">
         <div className="space-y-4">
           <div className="bg-background rounded-xl p-2.5 inline-block shadow-soft">
             <img src={logo} alt="BharatOne" className="h-9 w-auto" />
