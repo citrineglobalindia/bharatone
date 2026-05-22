@@ -159,8 +159,8 @@ export function Navbar() {
               <img src={logo} alt="BharatOne" className="relative h-9 sm:h-11 w-auto" />
             </motion.div>
             <div className="flex flex-col leading-tight">
-              <span className="font-display font-bold text-sm sm:text-base tracking-tight">
-                Bharat<span className="text-[var(--saffron)]">One</span>
+              <span className="font-display font-bold text-sm sm:text-base tracking-tight whitespace-pre-wrap">
+                {"BharatOne\n"}
               </span>
               <span className="hidden sm:block text-[10px] text-muted-foreground tracking-wider uppercase">
                 Serving Citizens
