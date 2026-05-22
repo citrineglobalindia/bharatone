@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/site/Navbar";
 import { HeadlinesMarquee } from "@/components/site/HeadlinesMarquee";
 import { Hero, Stats } from "@/components/site/Hero";
@@ -6,9 +8,11 @@ import { Services } from "@/components/site/Services";
 import { Schemes, CTA, Awards } from "@/components/site/Schemes";
 import { Footer } from "@/components/site/Footer";
 import { Chatbot } from "@/components/site/Chatbot";
+import { Loader } from "@/components/site/Loader";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  ssr: false,
   head: () => ({
     meta: [
       { title: "BharatOne — Empowering Indian Citizens with Easy Access to Services" },
@@ -28,8 +32,16 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 1800);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
+      <AnimatePresence>{loading && <Loader />}</AnimatePresence>
       <Navbar />
       <main>
         <div className="pt-[60px]">
