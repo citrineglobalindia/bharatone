@@ -20,6 +20,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminVisitorsRouteImport } from './routes/admin/visitors'
 import { Route as AdminResponsesRouteImport } from './routes/admin/responses'
+import { Route as AdminNewsletterRouteImport } from './routes/admin/newsletter'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminChatbotRouteImport } from './routes/admin/chatbot'
@@ -80,6 +81,11 @@ const AdminResponsesRoute = AdminResponsesRouteImport.update({
   path: '/admin/responses',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNewsletterRoute = AdminNewsletterRouteImport.update({
+  id: '/admin/newsletter',
+  path: '/admin/newsletter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/admin/chatbot': typeof AdminChatbotRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/responses': typeof AdminResponsesRoute
   '/admin/visitors': typeof AdminVisitorsRoute
   '/admin/': typeof AdminIndexRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/admin/chatbot': typeof AdminChatbotRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/responses': typeof AdminResponsesRoute
   '/admin/visitors': typeof AdminVisitorsRoute
   '/admin': typeof AdminIndexRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/admin/chatbot': typeof AdminChatbotRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/responses': typeof AdminResponsesRoute
   '/admin/visitors': typeof AdminVisitorsRoute
   '/admin/': typeof AdminIndexRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/admin/chatbot'
     | '/admin/dashboard'
     | '/admin/login'
+    | '/admin/newsletter'
     | '/admin/responses'
     | '/admin/visitors'
     | '/admin/'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/admin/chatbot'
     | '/admin/dashboard'
     | '/admin/login'
+    | '/admin/newsletter'
     | '/admin/responses'
     | '/admin/visitors'
     | '/admin'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/admin/chatbot'
     | '/admin/dashboard'
     | '/admin/login'
+    | '/admin/newsletter'
     | '/admin/responses'
     | '/admin/visitors'
     | '/admin/'
@@ -220,6 +232,7 @@ export interface RootRouteChildren {
   AdminChatbotRoute: typeof AdminChatbotRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminNewsletterRoute: typeof AdminNewsletterRoute
   AdminResponsesRoute: typeof AdminResponsesRoute
   AdminVisitorsRoute: typeof AdminVisitorsRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -304,6 +317,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminResponsesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/newsletter': {
+      id: '/admin/newsletter'
+      path: '/admin/newsletter'
+      fullPath: '/admin/newsletter'
+      preLoaderRoute: typeof AdminNewsletterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -348,6 +368,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminChatbotRoute: AdminChatbotRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminNewsletterRoute: AdminNewsletterRoute,
   AdminResponsesRoute: AdminResponsesRoute,
   AdminVisitorsRoute: AdminVisitorsRoute,
   AdminIndexRoute: AdminIndexRoute,

@@ -18,6 +18,15 @@ import {
   ChevronDown,
   Mail,
   Search,
+  FileText,
+  CheckCircle2,
+  Award,
+  Coffee,
+  Smile,
+  Calendar,
+  Zap,
+  Quote,
+  HelpCircle,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -143,6 +152,73 @@ const jobs: Job[] = [
       "Maintain an internal knowledge base",
     ],
     niceToHave: ["1+ years in CX", "Multilingual (Hindi/Kannada/Tamil)", "Calm under pressure"],
+  },
+];
+
+const hiringSteps = [
+  { icon: FileText, title: "Apply", desc: "Submit the form on this page with your resume — takes ~5 minutes." },
+  { icon: Users, title: "Recruiter call", desc: "A 30-minute conversation to learn about you, your goals and BharatOne." },
+  { icon: Briefcase, title: "Skill assessment", desc: "Role-specific — either a take-home task, work sample or live problem-solving." },
+  { icon: Sparkles, title: "Team interviews", desc: "Meet 2-3 people you'd work with. We dig into craft, collaboration and values." },
+  { icon: Heart, title: "Founder chat", desc: "A 45-min conversation with leadership about mission, growth and life at BharatOne." },
+  { icon: CheckCircle2, title: "Offer", desc: "Detailed offer letter, equity (where applicable), and a warm welcome to the team." },
+];
+
+const benefits = [
+  { icon: Heart, title: "Health insurance", desc: "Comprehensive cover for you and your dependents — including parents." },
+  { icon: Calendar, title: "Generous leave", desc: "24 days paid leave + 12 public holidays + period leave + sick leave." },
+  { icon: GraduationCap, title: "Learning budget", desc: "₹50,000/year per person for books, courses, conferences and certifications." },
+  { icon: Coffee, title: "Hybrid work", desc: "Office in Hassan, but we trust you to work from wherever you do your best work." },
+  { icon: Award, title: "ESOPs", desc: "Equity options for full-time roles. We grow together." },
+  { icon: Smile, title: "Mental health", desc: "Confidential counselling and wellness sessions on the company." },
+  { icon: Zap, title: "Real impact", desc: "Your work shows up in 1,000+ centers across 28 states — and counting." },
+  { icon: Globe, title: "Family-first", desc: "Predictable hours. Generous parental leave. Pet-friendly office." },
+];
+
+const testimonials = [
+  {
+    quote:
+      "I joined BharatOne because I wanted my work to mean something beyond a paycheck. Three years in, the centers we've opened have served families I'll never meet — and that's the point.",
+    name: "Priya Rao",
+    role: "Operations Lead, South Karnataka",
+    avatar: "PR",
+  },
+  {
+    quote:
+      "The product team here treats every village as a first-class user. We do real research, ship real things, and the feedback loops are absurdly fast.",
+    name: "Arjun Mehta",
+    role: "Staff Engineer",
+    avatar: "AM",
+  },
+  {
+    quote:
+      "I came in as a junior designer with zero industry experience. The team invested in me from day one — code reviews, design crits, books, mentorship. I've grown more in a year here than my whole degree.",
+    name: "Fatima Sheikh",
+    role: "Product Designer",
+    avatar: "FS",
+  },
+];
+
+const faqs = [
+  {
+    q: "Do I need to relocate to Hassan?",
+    a: "Only for roles explicitly tagged 'Bengaluru' or 'Hassan'. Many engineering and design roles are fully remote within India.",
+  },
+  {
+    q: "What's your hiring timeline?",
+    a: "From application to offer typically 2-3 weeks. We respect your time — slow processes are bad business and worse hospitality.",
+  },
+  {
+    q: "Do you sponsor international candidates?",
+    a: "We currently hire only candidates with existing work authorisation in India.",
+  },
+  {
+    q: "What if my role isn't listed?",
+    a: "Send a note to careers@mybharatone.com with your CV and a paragraph on what you'd build with us. We read every email.",
+  },
+  {
+    q: "What does compensation look like?",
+    a: "Competitive cash + ESOPs for full-time roles. We benchmark against top-tier Indian startups and adjust regularly. Numbers are shared early in the first call.",
   },
 ];
 
@@ -417,6 +493,182 @@ function CareersPage() {
         </div>
       </section>
 
+      {/* Hiring process */}
+      <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto text-center mb-12"
+        >
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-saffron">
+            How we hire
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold mt-2">
+            From application to offer in 2-3 weeks
+          </h2>
+          <p className="text-muted-foreground mt-3">
+            We respect your time. No leetcode marathons, no ghosting — just a real conversation
+            about real work.
+          </p>
+        </motion.div>
+        <div className="relative max-w-4xl mx-auto">
+          <div
+            aria-hidden
+            className="absolute left-5 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--saffron)] via-border to-[var(--india-green)]"
+          />
+          <div className="space-y-8 sm:space-y-12">
+            {hiringSteps.map((step, i) => (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.55, delay: i * 0.05 }}
+                className={`relative pl-14 sm:pl-0 sm:grid sm:grid-cols-2 sm:gap-12 ${
+                  i % 2 === 0 ? "" : "sm:[&>*:first-child]:order-2"
+                }`}
+              >
+                <div className={`${i % 2 === 0 ? "sm:text-right sm:pr-12" : "sm:pl-12"}`}>
+                  <div className="text-xs font-mono text-saffron font-semibold">
+                    Step {i + 1}
+                  </div>
+                  <h3 className="font-display text-xl font-semibold mt-1">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+                <div className="hidden sm:block" />
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ type: "spring", stiffness: 320, damping: 18, delay: 0.1 }}
+                  className="absolute left-5 sm:left-1/2 top-1.5 -translate-x-1/2 h-10 w-10 rounded-full bg-gradient-to-br from-[var(--saffron)] to-[var(--india-green)] text-white flex items-center justify-center ring-4 ring-background"
+                >
+                  <step.icon className="h-4 w-4" />
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="bg-muted/40 border-y border-border">
+        <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-2xl mx-auto text-center mb-12"
+          >
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-india-green">
+              What you get
+            </div>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-2">
+              Benefits that actually help
+            </h2>
+            <p className="text-muted-foreground mt-3">
+              Real comp, real time off, real care for your family and growth.
+            </p>
+          </motion.div>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          >
+            {benefits.map((b) => (
+              <motion.div
+                key={b.title}
+                variants={fadeUp}
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                className="rounded-2xl border border-border bg-card p-5 hover:border-saffron/40 hover:shadow-soft transition-all"
+              >
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[var(--saffron)]/15 to-[var(--india-green)]/15 flex items-center justify-center">
+                  <b.icon className="h-5 w-5 text-saffron" />
+                </div>
+                <h3 className="font-display font-semibold text-base mt-3">{b.title}</h3>
+                <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{b.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto text-center mb-12"
+        >
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-ashoka">
+            Life at BharatOne
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold mt-2">
+            From the people building it
+          </h2>
+        </motion.div>
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid md:grid-cols-3 gap-4 sm:gap-6"
+        >
+          {testimonials.map((t) => (
+            <motion.figure
+              key={t.name}
+              variants={fadeUp}
+              className="rounded-3xl border border-border bg-card p-6 sm:p-7 relative hover:shadow-elegant transition-shadow"
+            >
+              <Quote className="absolute top-5 right-5 h-6 w-6 text-saffron/30" />
+              <blockquote className="text-sm leading-relaxed text-foreground/85">
+                "{t.quote}"
+              </blockquote>
+              <figcaption className="mt-5 flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[var(--saffron)] to-[var(--india-green)] text-white text-sm font-semibold flex items-center justify-center">
+                  {t.avatar}
+                </div>
+                <div>
+                  <div className="font-semibold text-sm">{t.name}</div>
+                  <div className="text-xs text-muted-foreground">{t.role}</div>
+                </div>
+              </figcaption>
+            </motion.figure>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-muted/40 border-y border-border">
+        <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-2xl mx-auto text-center mb-10"
+          >
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-saffron">
+              FAQ
+            </div>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-2">
+              Quick answers for applicants
+            </h2>
+          </motion.div>
+          <div className="max-w-3xl mx-auto space-y-3">
+            {faqs.map((f, i) => (
+              <FaqItem key={f.q} q={f.q} a={f.a} delay={i * 0.05} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
         <motion.div
@@ -455,5 +707,42 @@ function CareersPage() {
         job={applyFor}
       />
     </PageShell>
+  );
+}
+
+function FaqItem({ q, a, delay }: { q: string; a: string; delay: number }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay }}
+      className="rounded-2xl border border-border bg-card overflow-hidden"
+    >
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="w-full text-left p-5 flex items-start sm:items-center gap-3 hover:bg-muted/40 transition-colors"
+      >
+        <HelpCircle className="h-4 w-4 text-saffron mt-1 sm:mt-0 shrink-0" />
+        <span className="flex-1 font-semibold text-sm sm:text-base">{q}</span>
+        <ChevronDown
+          className={`h-4 w-4 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden border-t border-border"
+          >
+            <div className="p-5 text-sm text-muted-foreground leading-relaxed">{a}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }

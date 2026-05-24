@@ -93,3 +93,14 @@ export type JobApplication = {
   source: string | null;
   user_agent: string | null;
 };
+
+
+export type NewsletterSubscriber = {
+  id: string;
+  created_at: string;
+  email: string;
+  status: "subscribed" | "unsubscribed" | "bounced";
+  source: string | null;
+  user_agent: string | null;
+  ip_hint: string | null;
+};

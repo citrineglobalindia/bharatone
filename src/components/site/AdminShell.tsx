@@ -9,6 +9,7 @@ import {
   Users,
   MessageCircle,
   Briefcase,
+  Mail,
   Menu,
   X,
   Loader2,
@@ -22,6 +23,7 @@ const navItems = [
   { to: "/admin/visitors", label: "Visitors", icon: Users },
   { to: "/admin/applications", label: "Applications", icon: Briefcase },
   { to: "/admin/chatbot", label: "Chatbot", icon: MessageCircle },
+  { to: "/admin/newsletter", label: "Newsletter", icon: Mail },
 ];
 
 export function AdminShell({ children, title }: { children: ReactNode; title: string }) {

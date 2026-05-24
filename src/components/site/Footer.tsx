@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { Mail, Phone, MapPin, ArrowRight, ArrowUp, Check } from "lucide-react";
 import logo from "@/assets/bharatone-logo.png";
+import { getSupabase } from "@/lib/supabase";
 
 /* -------------------------------------------------------------------------- */
 /* Inline brand-icon SVGs (lucide-react 1.16 has no brand glyphs)             */
@@ -104,6 +105,8 @@ function SocialIcon({
   return (
     <motion.a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label={label}
       variants={itemVariants}
       whileHover={{ scale: 1.12, y: -3 }}
@@ -166,10 +169,26 @@ function Newsletter() {
     e.preventDefault();
     if (!email || state === "submitting") return;
     setState("submitting");
-    await new Promise((r) => setTimeout(r, 700));
-    setState("success");
-    setEmail("");
-    setTimeout(() => setState("idle"), 3200);
+    try {
+      const supabase = getSupabase();
+      const { error } = await supabase
+        .from("bharatone_newsletter_subscribers")
+        .insert({
+          email: email.trim().toLowerCase(),
+          source: typeof window !== "undefined" ? window.location.href : null,
+          user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
+        });
+      // Duplicate-email errors are a soft success — they're already on the list
+      if (error && error.code !== "23505") {
+        console.error(error);
+      }
+      setState("success");
+      setEmail("");
+      setTimeout(() => setState("idle"), 3200);
+    } catch (err) {
+      console.error(err);
+      setState("idle");
+    }
   };
 
   return (
@@ -325,11 +344,11 @@ export function Footer() {
             Live across 1,000+ centers in India
           </motion.div>
           <motion.div variants={containerVariants} className="flex flex-wrap gap-2.5 pt-1">
-            <SocialIcon href="#" label="Facebook" Icon={FacebookIcon} />
-            <SocialIcon href="#" label="Instagram" Icon={InstagramIcon} />
-            <SocialIcon href="#" label="Twitter / X" Icon={TwitterIcon} />
-            <SocialIcon href="#" label="YouTube" Icon={YoutubeIcon} />
-            <SocialIcon href="#" label="LinkedIn" Icon={LinkedinIcon} />
+            <SocialIcon href="https://www.facebook.com/" label="Facebook" Icon={FacebookIcon} />
+            <SocialIcon href="https://www.instagram.com/" label="Instagram" Icon={InstagramIcon} />
+            <SocialIcon href="https://x.com/" label="Twitter / X" Icon={TwitterIcon} />
+            <SocialIcon href="https://www.youtube.com/" label="YouTube" Icon={YoutubeIcon} />
+            <SocialIcon href="https://www.linkedin.com/" label="LinkedIn" Icon={LinkedinIcon} />
           </motion.div>
         </motion.div>
 
