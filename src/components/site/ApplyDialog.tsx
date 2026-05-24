@@ -9,6 +9,7 @@ import {
   Mail,
   Phone,
   MapPin,
+  AtSign,
   Link as LinkIcon,
   FileText,
   GraduationCap,
