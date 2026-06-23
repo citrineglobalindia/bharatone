@@ -65,7 +65,7 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="mt-8 flex flex-col sm:flex-row gap-3"
           >
-            <Button size="lg" onClick={() => { window.location.href = "https://bharatoneui.vercel.app/register"; }} className="bg-gradient-saffron text-primary-foreground shadow-soft hover:shadow-glow transition-shadow group">
+            <Button size="lg" onClick={() => { window.location.href = "https://bharatoneui.vercel.app/get-started"; }} className="bg-gradient-saffron text-primary-foreground shadow-soft hover:shadow-glow transition-shadow group">
               Register Your Center
               <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
             </Button>
