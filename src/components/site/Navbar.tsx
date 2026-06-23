@@ -205,10 +205,10 @@ export function Navbar() {
             >
               <Search className="h-4 w-4" />
             </button>
-            <button onClick={() => { window.location.href = "https://bharatoneui.vercel.app/login"; }} className="hidden md:inline-flex items-center h-10 px-4 rounded-lg text-sm font-semibold text-foreground hover:bg-muted transition-colors">
+            <button onClick={() => { window.location.href = "https://app.mybharatone.com/login"; }} className="hidden md:inline-flex items-center h-10 px-4 rounded-lg text-sm font-semibold text-foreground hover:bg-muted transition-colors">
               Login
             </button>
-            <Button onClick={() => { window.location.href = "https://bharatoneui.vercel.app/get-started"; }} className="hidden md:inline-flex relative overflow-hidden bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)] text-white shadow-soft hover:shadow-glow transition-shadow group">
+            <Button onClick={() => { window.location.href = "https://app.mybharatone.com/get-started"; }} className="hidden md:inline-flex relative overflow-hidden bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)] text-white shadow-soft hover:shadow-glow transition-shadow group">
               <span className="relative z-10 flex items-center gap-1.5">
                 Register Center <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
@@ -398,13 +398,13 @@ export function Navbar() {
               >
                 <Button
                   variant="outline"
-                  onClick={() => { setOpen(false); window.location.href = "https://bharatoneui.vercel.app/login"; }}
+                  onClick={() => { setOpen(false); window.location.href = "https://app.mybharatone.com/login"; }}
                   className="w-full h-11 border-2"
                 >
                   Login
                 </Button>
                 <Button
-                  onClick={() => { setOpen(false); window.location.href = "https://bharatoneui.vercel.app/get-started"; }}
+                  onClick={() => { setOpen(false); window.location.href = "https://app.mybharatone.com/get-started"; }}
                   className="w-full h-11 bg-gradient-to-r from-[var(--saffron)] to-[var(--india-green)] text-white shadow-soft"
                 >
                   Register Your Center <ArrowRight className="ml-2 h-4 w-4" />
